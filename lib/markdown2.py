@@ -452,7 +452,7 @@ class Markdown(object):
         r"(.*:\s+>\n\s+[\S\s]+?)(?=\n\w+\s*:\s*\w+\n|\Z)", re.MULTILINE
     )
     _key_val_list_pat = re.compile(
-        r"^-(?:[ \t]*([^:\s]*)(?:[ \t]*[:-][ \t]*(\S+))?)(?:\n((?:[ \t]+[^\n]+\n?)+))?",
+        r"^-(?:[ \t]*([^\n]*)(?:[ \t]*[:-][ \t]*(\S+))?)(?:\n((?:[ \t]+[^\n]+\n?)+))?",
         re.MULTILINE,
     )
     _key_val_dict_pat = re.compile(
@@ -2232,7 +2232,7 @@ class Markdown(object):
         text = self._naked_gt_re.sub('&gt;', text)
         return text
 
-    _incomplete_tags_re = re.compile("<(/?\w+?(?!\w).+?[\s/]+?)")
+    _incomplete_tags_re = re.compile(r"<(/?\w+?(?!\w).+?[\s/]+?)")
 
     def _encode_incomplete_tags(self, text):
         if self.safe_mode not in ("replace", "escape"):
